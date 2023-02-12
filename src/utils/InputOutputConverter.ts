@@ -4,7 +4,7 @@ import {
   MarsRoverPosition,
   WorldDimensions,
 } from '../types'
-import { Action, CardinalDirection } from '../constants'
+import { RobotAction, CardinalDirection } from '../constants'
 
 export module InputOutputConverter {
   export interface MarsRoverStartAndActions {
@@ -90,11 +90,11 @@ export module InputOutputConverter {
   function parseActionString(s: string): MarsRoverAction {
     switch (s) {
       case 'L':
-        return Action.RotateLeft
+        return RobotAction.RotateLeft
       case 'R':
-        return Action.RotateRight
+        return RobotAction.RotateRight
       case 'F':
-        return Action.MoveForward
+        return RobotAction.MoveForward
       default:
         throw new Error('Invalid action')
     }

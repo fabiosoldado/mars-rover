@@ -1,6 +1,6 @@
 import { InputOutputConverter } from './InputOutputConverter'
 import { WorldDimensions } from '../types'
-import { Action, CardinalDirection } from '../constants'
+import { RobotAction, CardinalDirection } from '../constants'
 import MarsRoverStartAndActions = InputOutputConverter.MarsRoverStartAndActions
 
 describe('InputOutputConverter', () => {
@@ -30,11 +30,11 @@ describe('InputOutputConverter', () => {
         },
         initialOrientation: CardinalDirection.East,
         actions: [
-          Action.RotateLeft,
-          Action.MoveForward,
-          Action.RotateRight,
-          Action.MoveForward,
-          Action.MoveForward,
+          RobotAction.RotateLeft,
+          RobotAction.MoveForward,
+          RobotAction.RotateRight,
+          RobotAction.MoveForward,
+          RobotAction.MoveForward,
         ],
       })
     })

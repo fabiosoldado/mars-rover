@@ -6,8 +6,13 @@ export enum CardinalDirection {
   West = 'West',
 }
 
+export enum RotationDirection {
+  Left = 'Left',
+  Right = 'Right',
+}
+
 /** Constants representing the actions that a robot can take */
-export enum Action {
+export enum RobotAction {
   MoveForward = 'MoveForward',
   RotateLeft = 'RotateLeft',
   RotateRight = 'RotateRight',
