@@ -1,4 +1,4 @@
-import { Action, Orientation, Position, State, WorldDimensions } from './types'
+import { Action, Orientation, Position, State, WorldDimensions } from '../types'
 
 /** Abstract class that represents an Action Performer. Can be extended with any set of Actions and supported
  * orientations. */

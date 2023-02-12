@@ -1,5 +1,5 @@
-import { MarsRoverState } from './types'
-import { CardinalDirection, RobotAction } from './constants'
+import { MarsRoverState } from '../types'
+import { CardinalDirection, RobotAction } from '../constants'
 import { MarsRoverActionPerformer } from './MarsRoverActionPerformer'
 
 describe('MarsRover', () => {

@@ -5,9 +5,9 @@ import {
   MarsRoverPosition,
   MarsRoverState,
   MarsRoverWorldDimensions,
-} from './types'
-import { RobotAction, RotationDirection } from './constants'
-import { CardinalOrientationHelper } from './utils/CardinalOrientationHelper'
+} from '../types'
+import { RobotAction, RotationDirection } from '../constants'
+import { CardinalOrientationHelper } from '../utils/CardinalOrientationHelper'
 
 export class InvalidPositionError extends RangeError {
   constructor() {

@@ -1,6 +1,6 @@
 import ActionPerformer from './ActionPerformer'
-import { Position, State, WorldDimensions } from './types'
-import { CardinalDirection } from './constants'
+import { Position, State, WorldDimensions } from '../types'
+import { CardinalDirection } from '../constants'
 
 type SimpleAction = 'up' | 'down'
 interface SimpleState extends State<Position, CardinalDirection.North> {
