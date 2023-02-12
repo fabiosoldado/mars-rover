@@ -2,7 +2,7 @@ import {
   MarsRoverAction,
   MarsRoverOrientation,
   MarsRoverPosition,
-  WorldDimensions,
+  MarsRoverWorldDimensions,
 } from '../types'
 import { RobotAction, CardinalDirection } from '../constants'
 
@@ -18,7 +18,7 @@ export module InputOutputConverter {
     /^\(([0-9]+), ([0-9]+), ([NSEW])\) ([LRF]+)$/
   )
 
-  export function parseWorldDimensions(s: string): WorldDimensions {
+  export function parseWorldDimensions(s: string): MarsRoverWorldDimensions {
     const regexResult = worldDimensionsRegex.exec(s)
     if (regexResult === null) {
       throw new Error('Invalid world dimensions input')

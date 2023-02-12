@@ -1,4 +1,4 @@
-import { Action, CardinalDirection } from './constants'
+import { RobotAction, CardinalDirection } from './constants'
 
 /** Represents the limits of a 2-dimensional world know by the robot */
 export interface WorldDimensions {
@@ -8,11 +8,25 @@ export interface WorldDimensions {
   maxLongitude: number
 }
 
-/** Represents the position of the Mars Rover */
-export type MarsRoverPosition = {
+/** Represents a position in a 2-dimensional world */
+export type Position = {
   xPosition: number
   yPosition: number
 }
+
+
+export type Orientation = string
+export type Action = string
+
+export interface State<P extends Position, O extends Orientation> {
+  position: P
+  orientation: O
+  isLost: boolean
+}
+
+export type MarsRoverWorldDimensions = WorldDimensions
+/** Represents the position of the Mars Rover */
+export type MarsRoverPosition = Position
 
 /** Represents the orientation of the Mars Rover */
 export type MarsRoverOrientation =
@@ -23,6 +37,8 @@ export type MarsRoverOrientation =
 
 /** Represents the actions that Mars Rover can take */
 export type MarsRoverAction =
-  | Action.MoveForward
-  | Action.RotateLeft
-  | Action.RotateRight
+  | RobotAction.MoveForward
+  | RobotAction.RotateLeft
+  | RobotAction.RotateRight
+
+export type MarsRoverState = State<MarsRoverPosition, MarsRoverOrientation>
