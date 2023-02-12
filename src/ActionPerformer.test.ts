@@ -32,13 +32,45 @@ class SimpleActionPerformer extends ActionPerformer<
       case 'down':
         this.downActionCounter++
         return newState
-      default:
-        throw new Error('Invalid Action')
     }
   }
 }
 
 describe('ActionPerformer', () => {
+  describe('constructor', () => {
+    test('succeeds with valid input', () => {
+      expect(
+        () =>
+          new SimpleActionPerformer({
+            maxLatitude: 10,
+            maxLongitude: 10,
+          })
+      ).not.toThrow()
+      expect(
+        () =>
+          new SimpleActionPerformer({
+            maxLatitude: 0,
+            maxLongitude: 10,
+          })
+      ).not.toThrow()
+    })
+    test('fails with invalid input', () => {
+      expect(
+        () =>
+          new SimpleActionPerformer({
+            maxLatitude: -1,
+            maxLongitude: 10,
+          })
+      ).toThrow(RangeError)
+      expect(
+        () =>
+          new SimpleActionPerformer({
+            maxLatitude: 10,
+            maxLongitude: -1,
+          })
+      ).toThrow(RangeError)
+    })
+  })
   describe('performActions', () => {
     const actionPerformer = new SimpleActionPerformer({
       maxLatitude: 4,
