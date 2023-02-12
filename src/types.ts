@@ -41,3 +41,9 @@ export type MarsRoverAction =
   | RobotAction.RotateRight
 
 export type MarsRoverState = State<MarsRoverPosition, MarsRoverOrientation>
+
+export interface MarsRoverStartAndActions {
+  initialPosition: MarsRoverPosition
+  initialOrientation: MarsRoverOrientation
+  actions: MarsRoverAction[]
+}

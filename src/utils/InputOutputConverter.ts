@@ -1,23 +1,19 @@
 import {
   MarsRoverAction,
-  MarsRoverOrientation,
-  MarsRoverPosition,
+  MarsRoverStartAndActions,
+  MarsRoverState,
   MarsRoverWorldDimensions,
 } from '../types'
 import { RobotAction, CardinalDirection } from '../constants'
 
 export module InputOutputConverter {
-  export interface MarsRoverStartAndActions {
-    initialPosition: MarsRoverPosition
-    initialOrientation: MarsRoverOrientation
-    actions: MarsRoverAction[]
-  }
-
   const worldDimensionsRegex = new RegExp(/^([0-9]+) ([0-9]+)$/)
   const marsPositionRegex = new RegExp(
     /^\(([0-9]+), ([0-9]+), ([NSEW])\) ([LRF]+)$/
   )
 
+  /** Parses the first line of the input. Throws an error if the string is invalid. Example of a valid string: "4 8",
+   * where 4 is the max latitude and 8 is the max longitude. */
   export function parseWorldDimensions(s: string): MarsRoverWorldDimensions {
     const regexResult = worldDimensionsRegex.exec(s)
     if (regexResult === null) {
@@ -46,6 +42,8 @@ export module InputOutputConverter {
     return { maxLatitude, maxLongitude }
   }
 
+  /** Parses the robot start position and actions string. Throws and error if the string is invalid. Example of a
+   * valid string: "(2, 3, E) LFRFF". */
   export function parseStartPositionAndActions(
     s: string
   ): MarsRoverStartAndActions {
@@ -87,6 +85,14 @@ export module InputOutputConverter {
     }
   }
 
+  export function convertMarsRoverStateToString(state: MarsRoverState): string {
+    const { position, orientation, isLost } = state
+    const orientationChar = getOrientationChar(orientation)
+    return `(${position.x}, ${position.y}, ${orientationChar})${isLostSuffix(
+      isLost
+    )}`
+  }
+
   function parseActionString(s: string): MarsRoverAction {
     switch (s) {
       case 'L':
@@ -113,5 +119,22 @@ export module InputOutputConverter {
       default:
         throw new Error('Invalid direction string')
     }
+  }
+
+  function getOrientationChar(orientation: CardinalDirection): string {
+    switch (orientation) {
+      case CardinalDirection.North:
+        return 'N'
+      case CardinalDirection.South:
+        return 'S'
+      case CardinalDirection.East:
+        return 'E'
+      case CardinalDirection.West:
+        return 'W'
+    }
+  }
+
+  function isLostSuffix(isLost: boolean): string {
+    return isLost ? ' LOST' : ''
   }
 }

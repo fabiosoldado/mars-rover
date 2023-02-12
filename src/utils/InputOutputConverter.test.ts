@@ -1,7 +1,10 @@
 import { InputOutputConverter } from './InputOutputConverter'
-import { WorldDimensions } from '../types'
-import { RobotAction, CardinalDirection } from '../constants'
-import MarsRoverStartAndActions = InputOutputConverter.MarsRoverStartAndActions
+import {
+  MarsRoverStartAndActions,
+  MarsRoverState,
+  WorldDimensions,
+} from '../types'
+import { CardinalDirection, RobotAction } from '../constants'
 
 describe('InputOutputConverter', () => {
   describe('parseWorldDimensions', () => {
@@ -18,7 +21,6 @@ describe('InputOutputConverter', () => {
       expect(() => InputOutputConverter.parseWorldDimensions('4 A')).toThrow()
     })
   })
-
   describe('parseStartPositionAndActions', () => {
     test('succeeds with valid string', () => {
       expect(
@@ -57,6 +59,34 @@ describe('InputOutputConverter', () => {
       expect(() =>
         InputOutputConverter.parseStartPositionAndActions('(, 3, SE) LFRFB')
       ).toThrow()
+    })
+  })
+  describe('convertMarsRoverStateToString', () => {
+    test('when robot is not lost', () => {
+      const state: MarsRoverState = {
+        position: {
+          x: 4,
+          y: 4,
+        },
+        orientation: CardinalDirection.East,
+        isLost: false,
+      }
+      expect(InputOutputConverter.convertMarsRoverStateToString(state)).toBe(
+        '(4, 4, E)'
+      )
+    })
+    test('when robot is lost', () => {
+      const state: MarsRoverState = {
+        position: {
+          x: 0,
+          y: 4,
+        },
+        orientation: CardinalDirection.West,
+        isLost: true,
+      }
+      expect(InputOutputConverter.convertMarsRoverStateToString(state)).toBe(
+        '(0, 4, W) LOST'
+      )
     })
   })
 })
