@@ -85,6 +85,7 @@ export module InputOutputConverter {
     }
   }
 
+  /** Returns the state in its string representation. Example: "(4, 4, E)" */
   export function convertMarsRoverStateToString(state: MarsRoverState): string {
     const { position, orientation, isLost } = state
     const orientationChar = getOrientationChar(orientation)
