@@ -14,7 +14,7 @@ describe('CardinalOrientationHelper', () => {
         CardinalOrientationHelper.rotate(orientation, RotationDirection.Right)
       ).toBe(CardinalDirection.East)
     })
-    test('getXYMove', () => {
+    test('getMoveForwardOffsets', () => {
       const { xOffset, yOffset } =
         CardinalOrientationHelper.getMoveForwardOffsets(orientation, 1)
       expect(xOffset).toBe(0)
@@ -52,7 +52,7 @@ describe('CardinalOrientationHelper', () => {
         CardinalOrientationHelper.rotate(orientation, RotationDirection.Right)
       ).toBe(CardinalDirection.North)
     })
-    test('getXYMove', () => {
+    test('getMoveForwardOffsets', () => {
       const { xOffset, yOffset } =
         CardinalOrientationHelper.getMoveForwardOffsets(orientation, 3)
       expect(xOffset).toBe(-3)
@@ -71,7 +71,7 @@ describe('CardinalOrientationHelper', () => {
         CardinalOrientationHelper.rotate(orientation, RotationDirection.Right)
       ).toBe(CardinalDirection.South)
     })
-    test('getXYMove', () => {
+    test('getMoveForwardOffsets', () => {
       const { xOffset, yOffset } =
         CardinalOrientationHelper.getMoveForwardOffsets(orientation, 4)
       expect(xOffset).toBe(4)
