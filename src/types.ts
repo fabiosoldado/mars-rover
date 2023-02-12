@@ -10,10 +10,9 @@ export interface WorldDimensions {
 
 /** Represents a position in a 2-dimensional world */
 export type Position = {
-  xPosition: number
-  yPosition: number
+  x: number
+  y: number
 }
-
 
 export type Orientation = string
 export type Action = string

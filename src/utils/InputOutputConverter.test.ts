@@ -25,8 +25,8 @@ describe('InputOutputConverter', () => {
         InputOutputConverter.parseStartPositionAndActions('(2, 3, E) LFRFF')
       ).toStrictEqual(<MarsRoverStartAndActions>{
         initialPosition: {
-          xPosition: 2,
-          yPosition: 3,
+          x: 2,
+          y: 3,
         },
         initialOrientation: CardinalDirection.East,
         actions: [

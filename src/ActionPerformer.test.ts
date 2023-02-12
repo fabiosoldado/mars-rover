@@ -79,8 +79,8 @@ describe('ActionPerformer', () => {
     const initialState: SimpleState = {
       stateIndex: 0,
       position: {
-        yPosition: 0,
-        xPosition: 0,
+        y: 0,
+        x: 0,
       },
       orientation: CardinalDirection.North,
       isLost: false,
