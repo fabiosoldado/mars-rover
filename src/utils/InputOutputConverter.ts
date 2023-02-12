@@ -1,8 +1,23 @@
-import { WorldDimensions } from '../types'
-
-const worldDimensionsRegex = new RegExp(/^([0-9]+) ([0-9]+)$/)
+import {
+  MarsRoverAction,
+  MarsRoverOrientation,
+  MarsRoverPosition,
+  WorldDimensions,
+} from '../types'
+import { Action, CardinalDirection } from '../constants'
 
 export module InputOutputConverter {
+  export interface MarsRoverStartAndActions {
+    initialPosition: MarsRoverPosition
+    initialOrientation: MarsRoverOrientation
+    actions: MarsRoverAction[]
+  }
+
+  const worldDimensionsRegex = new RegExp(/^([0-9]+) ([0-9]+)$/)
+  const marsPositionRegex = new RegExp(
+    /^\(([0-9]+), ([0-9]+), ([NSEW])\) ([LRF]+)$/
+  )
+
   export function parseWorldDimensions(s: string): WorldDimensions {
     const regexResult = worldDimensionsRegex.exec(s)
     if (regexResult === null) {
@@ -29,5 +44,74 @@ export module InputOutputConverter {
     }
 
     return { maxLatitude, maxLongitude }
+  }
+
+  export function parseStartPositionAndActions(
+    s: string
+  ): MarsRoverStartAndActions {
+    const regexResult = marsPositionRegex.exec(s)
+    if (regexResult === null) {
+      throw new Error('Invalid input for Mars Rover starting position')
+    }
+
+    const [
+      _,
+      xPositionString,
+      yPositionString,
+      orientationString,
+      actionsString,
+    ] = regexResult
+
+    if (
+      !xPositionString ||
+      !yPositionString ||
+      !orientationString ||
+      !actionsString
+    ) {
+      throw new Error('Invalid input for Mars Rover starting position')
+    }
+
+    const xPosition = Number.parseInt(xPositionString)
+    const yPosition = Number.parseInt(yPositionString)
+
+    const orientation = parseOrientation(orientationString)
+    const actions = actionsString.split('').map(parseActionString)
+
+    return {
+      initialPosition: {
+        xPosition,
+        yPosition,
+      },
+      initialOrientation: orientation,
+      actions,
+    }
+  }
+
+  function parseActionString(s: string): MarsRoverAction {
+    switch (s) {
+      case 'L':
+        return Action.RotateLeft
+      case 'R':
+        return Action.RotateRight
+      case 'F':
+        return Action.MoveForward
+      default:
+        throw new Error('Invalid action')
+    }
+  }
+
+  function parseOrientation(s: string): CardinalDirection {
+    switch (s) {
+      case 'N':
+        return CardinalDirection.North
+      case 'S':
+        return CardinalDirection.South
+      case 'W':
+        return CardinalDirection.West
+      case 'E':
+        return CardinalDirection.East
+      default:
+        throw new Error('Invalid direction string')
+    }
   }
 }
