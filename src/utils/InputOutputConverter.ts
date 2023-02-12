@@ -71,16 +71,16 @@ export module InputOutputConverter {
       throw new Error('Invalid input for Mars Rover starting position')
     }
 
-    const xPosition = Number.parseInt(xPositionString)
-    const yPosition = Number.parseInt(yPositionString)
+    const x = Number.parseInt(xPositionString)
+    const y = Number.parseInt(yPositionString)
 
     const orientation = parseOrientation(orientationString)
     const actions = actionsString.split('').map(parseActionString)
 
     return {
       initialPosition: {
-        xPosition,
-        yPosition,
+        x,
+        y,
       },
       initialOrientation: orientation,
       actions,
