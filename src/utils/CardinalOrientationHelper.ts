@@ -20,8 +20,12 @@ export module CardinalOrientationHelper {
     rotateDirection: RotationDirection
   ): CardinalDirection {
     const index = clockwiseCardinalPoints.indexOf(orientation)
-    const offset = rotateDirection === RotationDirection.Right ? 1 : 3
-    const resultIndex = (index + offset) % 4
+
+    /* We add clockwiseCardinalPoints.length to the offset, to prevent it from going bellow 0. */
+    const offset =
+      clockwiseCardinalPoints.length +
+      (rotateDirection === RotationDirection.Right ? 1 : -1)
+    const resultIndex = (index + offset) % clockwiseCardinalPoints.length
     const newOrientation = clockwiseCardinalPoints[resultIndex]
     if (newOrientation === undefined) {
       throw new Error('Invalid Orientation')
